@@ -27,6 +27,12 @@ app.get("/api/v1/health", (req, res) => {
     });
 });
 
+app.get("/health", (req, res) => {
+    res.status(200);
+    res.send("Server is healthy");
+});
+
+
 app.use("/", employeeRoutes)
 
 export default app;
