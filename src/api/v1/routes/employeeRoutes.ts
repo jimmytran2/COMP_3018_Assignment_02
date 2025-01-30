@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import * as employeeController from "../controllers/employeeController";
 
 const router: Router = express.Router();
 
@@ -20,5 +21,7 @@ router.get("/", (req, res) => {
 router.get("/", (req, res) => {
   res.send("Retrieve tasks");
 });
+
+router.post("/", employeeController.createEmployee);
 
 export default router;
