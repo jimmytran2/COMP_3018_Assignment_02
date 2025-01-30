@@ -1,8 +1,11 @@
 import express, { Express } from "express";
 import morgan from "morgan";
 import employeeRoutes from "./api/v1/routes/employeeRoutes";
+import setupSwagger from "../config/swagger";
 
 const app: Express = express();
+
+setupSwagger(app);
 
 app.use(morgan("combined"));
 app.use(express.json());
@@ -19,20 +22,19 @@ app.use(express.json());
  *     description: The application's status, uptime, the current timestamp, and version
  */
 app.get("/api/v1/health", (req, res) => {
-    res.json({
-        status: "OK",
-        uptime: process.uptime(),
-        timestamp: new Date().toISOString(),
-        version: "1.0.0"
-    });
+  res.json({
+    status: "OK",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    version: "1.0.0",
+  });
 });
 
 app.get("/health", (req, res) => {
-    res.status(200);
-    res.send("Server is healthy");
+  res.status(200);
+  res.send("Server is healthy");
 });
 
-
-app.use("/", employeeRoutes)
+app.use("/api/v1/employee", employeeRoutes);
 
 export default app;
