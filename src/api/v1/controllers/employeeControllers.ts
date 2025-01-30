@@ -16,3 +16,16 @@ export const createEmployee = async (
     next(error);
   }
 };
+
+export const getAllEmployees = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const employees: Employee[] = await employeeService.getAllEmployees();
+    res.status(200).json({ message: "Employees retrieved", data: employees });
+  } catch (error) {
+    next(error);
+  }
+};

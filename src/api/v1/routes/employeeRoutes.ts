@@ -23,5 +23,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", employeeController.createEmployee);
+router.get("/", employeeController.getAllEmployees);
 
 export default router;

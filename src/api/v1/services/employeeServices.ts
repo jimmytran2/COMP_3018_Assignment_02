@@ -24,3 +24,7 @@ export const createEmployee = async (employee: {
   employees.push(newEmployee);
   return newEmployee;
 };
+
+export const getAllEmployees = async (): Promise<Employee[]> => {
+  return employees;
+};
