@@ -57,4 +57,20 @@ describe("Branch Routes", () => {
       expect(getBranchById).toHaveBeenCalled();
     });
   });
+
+  describe("PUT /api/v1/branches/:id", () => {
+    it("should call updateBranch controller", async () => {
+      const mockBranch = {
+        id: 1,
+        name: "Vancouver Branch",
+        address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
+        phone: "604-456-0022",
+      };
+
+      const mockId: number = 1;
+
+      await request(app).put(`/api/v1/branches/${mockId}`).send(mockBranch);
+      expect(updateBranch).toHaveBeenCalled();
+    });
+  });
 });
