@@ -5,6 +5,7 @@ import {
   getAllBranches,
   getBranchById,
   updateBranch,
+  deleteBranch,
 } from "../src/api/v1/controllers/branchControllers";
 
 jest.mock("../src/api/v1/controllers/branchControllers", () => ({
@@ -12,6 +13,7 @@ jest.mock("../src/api/v1/controllers/branchControllers", () => ({
   getAllBranches: jest.fn((req, res) => res.status(200).send()),
   getBranchById: jest.fn((req, res) => res.status(200).send()),
   updateBranch: jest.fn((req, res) => res.status(200).send()),
+  deleteBranch: jest.fn((req, res) => res.status(200).send()),
 }));
 
 describe("Branch Routes", () => {

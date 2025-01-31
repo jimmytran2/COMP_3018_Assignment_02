@@ -59,3 +59,16 @@ export const updateBranch = async (
     next(error);
   }
 };
+
+export const deleteBranch = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    await branchService.deletebranch(Number(req.params.id));
+    res.status(200).json({ message: "Branch deleted" });
+  } catch (error) {
+    next(error);
+  }
+};

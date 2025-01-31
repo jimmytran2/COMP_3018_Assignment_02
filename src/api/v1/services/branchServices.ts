@@ -46,3 +46,13 @@ export const updateBranch = async (
   branches[index] = { ...branches[index], ...branchData };
   return branches[index];
 };
+
+export const deletebranch = async (id: number): Promise<void> => {
+  const index: number = branches.findIndex((i) => i.id === id);
+
+  if (index === -1) {
+    throw new Error(`Branch with ID ${id} not found`);
+  }
+
+  branches.splice(index, 1);
+};
