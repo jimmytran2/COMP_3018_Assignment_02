@@ -86,7 +86,6 @@ describe("Employee Routes", () => {
   describe("DELETE /api/v1/employee/:id", () => {
     it("should call deleteEmployee controller", async () => {
       const mockId: number = 1;
-
       await request(app).delete(`/api/v1/employees/${mockId}`);
       expect(deleteEmployee).toHaveBeenCalled();
     });

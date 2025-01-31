@@ -73,4 +73,12 @@ describe("Branch Routes", () => {
       expect(updateBranch).toHaveBeenCalled();
     });
   });
+
+  describe("DELETE /api/v1/branch/:id", () => {
+    it("should call deleteBranch controller", async () => {
+      const mockId: number = 1;
+      await request(app).delete(`/api/v1/branches/${mockId}`);
+      expect(deleteBranch).toHaveBeenCalled();
+    });
+  });
 });
