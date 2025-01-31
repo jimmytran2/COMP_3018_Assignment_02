@@ -151,4 +151,10 @@ describe("Employee Controller", () => {
   //     );
   //   });
   // });
+
+  // describe("deleteEmployee", () => {
+  //   it("should handle successfull operation", async () => {
+
+  //   })
+  // })
 });

@@ -9,7 +9,7 @@ export type Employee = {
 };
 
 const employees: Employee[] = [];
-let newestId: number = 0;
+let newEmployeeId: number = 0;
 
 export const createEmployee = async (employee: {
   name: string;
@@ -19,8 +19,8 @@ export const createEmployee = async (employee: {
   phone: string;
   branch: number;
 }): Promise<Employee> => {
-  newestId++;
-  const newEmployee: Employee = { id: newestId, ...employee };
+  newEmployeeId++;
+  const newEmployee: Employee = { id: newEmployeeId, ...employee };
   employees.push(newEmployee);
   return newEmployee;
 };

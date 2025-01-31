@@ -36,5 +36,6 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/v1/employees", employeeRoutes);
+app.use("/api/v1/branches", branchRoutes);
 
 export default app;
