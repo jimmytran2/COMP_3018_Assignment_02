@@ -127,4 +127,28 @@ describe("Employee Controller", () => {
       });
     });
   });
+
+  // describe("updateEmployee", () => {
+  //   it("should handle successful operation", async () => {
+  //     const mockEmployee = {
+  //       id: 1,
+  //       name: "John Doe",
+  //       position: "Manager",
+  //       department: "Accounting",
+  //       email: "johndoe@pixell-river.com",
+  //       phone: "123-456-7890",
+  //       branch: 9,
+  //     };
+
+  //     (employeeService.updateEmployee as jest.Mock).mockResolvedValue(
+  //       mockEmployee
+  //     );
+
+  //     await employeeController.updateEmployee(
+  //       mockReq as Request,
+  //       mockRes as Response,
+  //       mockNext
+  //     );
+  //   });
+  // });
 });
