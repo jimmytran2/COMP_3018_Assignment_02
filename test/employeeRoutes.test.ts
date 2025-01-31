@@ -3,11 +3,13 @@ import app from "../src/app";
 import {
   createEmployee,
   getAllEmployees,
+  getEmployeeById,
 } from "../src/api/v1/controllers/employeeControllers";
 
 jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
   createEmployee: jest.fn((req, res) => res.status(201).send()),
   getAllEmployees: jest.fn((req, res) => res.status(200).send()),
+  getEmployeeById: jest.fn((req, res) => res.status(200).send()),
 }));
 
 describe("Employee Routes", () => {
@@ -36,6 +38,25 @@ describe("Employee Routes", () => {
     it("should call getAllEmployees controller", async () => {
       await request(app).get("/api/v1/employees");
       expect(getAllEmployees).toHaveBeenCalled();
+    });
+  });
+
+  describe("GET /api/v1/employees/:id", () => {
+    it("should call getEmployeeById controller", async () => {
+      const mockEmployee = {
+        id: 1,
+        name: "John Doe",
+        position: "Manager",
+        department: "Accounting",
+        email: "johndoe@pixell-river.com",
+        phone: "123-456-7890",
+        branch: 9,
+      };
+
+      const mockId: number = 1;
+
+      await request(app).get(`/api/v1/employees/${mockId}`).send(mockEmployee);
+      expect(getEmployeeById).toHaveBeenCalled();
     });
   });
 });
