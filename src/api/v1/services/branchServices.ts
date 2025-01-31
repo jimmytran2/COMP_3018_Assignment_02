@@ -8,7 +8,7 @@ export type Branch = {
 };
 
 const branches: Branch[] = [...branchData];
-let newBranchId: number = 0;
+let newBranchId: number = branches.length;
 
 export const createBranch = async (branch: {
   name: string;

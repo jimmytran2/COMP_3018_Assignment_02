@@ -11,7 +11,7 @@ export type Employee = {
 };
 
 const employees: Employee[] = [...employeeData];
-let newEmployeeId: number = 0;
+let newEmployeeId: number = employees.length;
 
 export const createEmployee = async (employee: {
   name: string;
