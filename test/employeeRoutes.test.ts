@@ -5,6 +5,7 @@ import {
   getAllEmployees,
   getEmployeeById,
   updateEmployee,
+  deleteEmployee,
 } from "../src/api/v1/controllers/employeeControllers";
 
 jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
@@ -12,6 +13,7 @@ jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
   getAllEmployees: jest.fn((req, res) => res.status(200).send()),
   getEmployeeById: jest.fn((req, res) => res.status(200).send()),
   updateEmployee: jest.fn((req, res) => res.status(200).send()),
+  deleteEmployee: jest.fn((req, res) => res.status(200).send()),
 }));
 
 describe("Employee Routes", () => {
@@ -74,10 +76,19 @@ describe("Employee Routes", () => {
         branch: 9,
       };
 
-      const mockId = 1;
+      const mockId: number = 1;
 
       await request(app).put(`/api/v1/employees/${mockId}`).send(mockEmployee);
       expect(updateEmployee).toHaveBeenCalled();
+    });
+  });
+
+  describe("DELETE /api/v1/employee/:id", () => {
+    it("should call deleteEmployee controller", async () => {
+      const mockId: number = 1;
+
+      await request(app).delete(`/api/v1/employees/${mockId}`);
+      expect(deleteEmployee).toHaveBeenCalled();
     });
   });
 });
