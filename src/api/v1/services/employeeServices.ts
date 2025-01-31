@@ -1,4 +1,5 @@
 import { employeeData } from "./employeeData";
+import { branchData } from "./branchData";
 
 export type Employee = {
   id: number;
@@ -63,4 +64,31 @@ export const deleteEmployee = async (id: number): Promise<void> => {
   }
 
   employees.splice(index, 1);
+};
+
+/**
+ * Array filter method
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+ */
+
+export const getEmployeeByBranch = async (
+  branchId: number
+): Promise<Employee[]> => {
+  const branchIndex: number = branchData.findIndex(
+    (branch) => branch.id === branchId
+  );
+
+  if (branchIndex === -1) {
+    throw new Error(`Branch ${branchId} does not exist`);
+  }
+
+  const employeesInBranch: Employee[] = employees.filter(
+    (employee) => employee.branch === branchId
+  );
+
+  if (employeesInBranch.length === 0) {
+    throw new Error(`There are no employees in branch ${branchId}`);
+  }
+
+  return employeesInBranch;
 };
