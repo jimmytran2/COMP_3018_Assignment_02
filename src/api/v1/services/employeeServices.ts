@@ -1,3 +1,5 @@
+import { employeeData } from "./employeeData";
+
 export type Employee = {
   id: number;
   name: string;
@@ -8,7 +10,7 @@ export type Employee = {
   branch: number;
 };
 
-const employees: Employee[] = [];
+const employees: Employee[] = [...employeeData];
 let newEmployeeId: number = 0;
 
 export const createEmployee = async (employee: {
