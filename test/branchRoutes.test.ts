@@ -3,11 +3,15 @@ import app from "../src/app";
 import {
   createBranch,
   getAllBranches,
+  getBranchById,
+  updateBranch,
 } from "../src/api/v1/controllers/branchControllers";
 
 jest.mock("../src/api/v1/controllers/branchControllers", () => ({
   createBranch: jest.fn((req, res) => res.status(201).send()),
   getAllBranches: jest.fn((req, res) => res.status(200).send()),
+  getBranchById: jest.fn((req, res) => res.status(200).send()),
+  updateBranch: jest.fn((req, res) => res.status(200).send()),
 }));
 
 describe("Branch Routes", () => {
