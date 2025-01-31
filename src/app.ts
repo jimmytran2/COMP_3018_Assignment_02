@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import morgan from "morgan";
 import employeeRoutes from "./api/v1/routes/employeeRoutes";
+import branchRoutes from "./api/v1/routes/branchRoutes";
 import setupSwagger from "../config/swagger";
 
 const app: Express = express();
