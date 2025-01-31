@@ -115,4 +115,28 @@ describe("Branch Controller", () => {
       });
     });
   });
+
+  describe("deleteBranch", () => {
+    it("should handle a successful operation", async () => {
+      const mockBranch = {
+        id: 1,
+        name: "Vancouver Branch",
+        address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
+        phone: "604-456-0022",
+      };
+
+      (branchService.deleteBranch as jest.Mock).mockResolvedValue(mockBranch);
+
+      await branchController.deleteBranch(
+        mockReq as Request,
+        mockRes as Response,
+        mockNext
+      );
+
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: "Branch deleted",
+      });
+    });
+  });
 });

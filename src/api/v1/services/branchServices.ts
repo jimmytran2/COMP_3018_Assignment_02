@@ -47,7 +47,7 @@ export const updateBranch = async (
   return branches[index];
 };
 
-export const deletebranch = async (id: number): Promise<void> => {
+export const deleteBranch = async (id: number): Promise<void> => {
   const index: number = branches.findIndex((i) => i.id === id);
 
   if (index === -1) {
