@@ -18,3 +18,7 @@ export const createBranch = async (branch: {
   branches.push(newBranch);
   return newBranch;
 };
+
+export const getAllBranches = async (): Promise<Branch[]> => {
+  return branches;
+};
