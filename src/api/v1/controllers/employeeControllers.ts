@@ -58,7 +58,20 @@ export const updateEmployee = async (
 
     res
       .status(200)
-      .json({ message: "Employee Updated", data: updatedEmployee });
+      .json({ message: "Employee updated", data: updatedEmployee });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteEmployee = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    await employeeService.deleteEmployee(Number(req.params.id));
+    res.status(200).json({ message: "Employee deleted" });
   } catch (error) {
     next(error);
   }

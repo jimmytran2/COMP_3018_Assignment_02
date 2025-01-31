@@ -31,9 +31,11 @@ export const getAllEmployees = async (): Promise<Employee[]> => {
 
 export const getEmployeeById = async (id: number): Promise<Employee> => {
   const index: number = employees.findIndex((i) => i.id === id);
+
   if (index === -1) {
-    throw new Error(`Item with ID ${id} not found`);
+    throw new Error(`Employee with ID ${id} not found`);
   }
+
   return employees[index];
 };
 
@@ -42,10 +44,21 @@ export const updateEmployee = async (
   employeeData: Partial<Employee>
 ): Promise<Employee> => {
   const index: number = employees.findIndex((i) => i.id === id);
+
   if (index === -1) {
-    throw new Error(`Item with ID ${id} not found`);
+    throw new Error(`Employee with ID ${id} not found`);
   }
 
   employees[index] = { ...employees[index], ...employeeData };
   return employees[index];
+};
+
+export const deleteEmployee = async (id: number): Promise<void> => {
+  const index: number = employees.findIndex((i) => i.id === id);
+
+  if (index === -1) {
+    throw new Error(`Employee with ID ${id} not found`);
+  }
+
+  employees.splice(index, 1);
 };
