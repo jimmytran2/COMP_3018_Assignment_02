@@ -36,3 +36,16 @@ export const getEmployeeById = async (id: number): Promise<Employee> => {
   }
   return employees[index];
 };
+
+export const updateEmployee = async (
+  id: number,
+  employeeData: Partial<Employee>
+): Promise<Employee> => {
+  const index: number = employees.findIndex((i) => i.id === id);
+  if (index === -1) {
+    throw new Error(`Item with ID ${id} not found`);
+  }
+
+  employees[index] = { ...employees[index], ...employeeData };
+  return employees[index];
+};

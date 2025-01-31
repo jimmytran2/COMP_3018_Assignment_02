@@ -44,3 +44,22 @@ export const getEmployeeById = async (
     next(error);
   }
 };
+
+export const updateEmployee = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const updatedEmployee: Employee = await employeeService.updateEmployee(
+      Number(req.params.id),
+      req.body
+    );
+
+    res
+      .status(200)
+      .json({ message: "Employee Updated", data: updatedEmployee });
+  } catch (error) {
+    next(error);
+  }
+};
