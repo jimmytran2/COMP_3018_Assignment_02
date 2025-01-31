@@ -29,3 +29,18 @@ export const getAllEmployees = async (
     next(error);
   }
 };
+
+export const getEmployeeById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const employee: Employee = await employeeService.getEmployeeById(
+      Number(req.params.id)
+    );
+    res.status(200).json({ message: "Employee retrieved", data: employee });
+  } catch (error) {
+    next(error);
+  }
+};
