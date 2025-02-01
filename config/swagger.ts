@@ -5,16 +5,20 @@ import { Express } from "express";
 
 // define swagger options
 const swaggerOptions: swaggerJsDoc.Options = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "API Documentation",
-            version: "1.0.0",
-        },
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "API Documentation",
+      version: "1.0.0",
     },
-    // path to annotated files
-    // **TODO** update to use routes instead of app 
-    apis: ["./src/api/v1/routes/employeeRoutes.ts", "./src/app.ts"],
+  },
+  // path to annotated files
+  // **TODO** update to use routes instead of app
+  apis: [
+    "./src/api/v1/routes/employeeRoutes.ts",
+    "./src/app.ts",
+    "./src/api/v1/routes/branchRoutes.ts",
+  ],
 };
 
 // Initialize Swagger JSDoc object
@@ -24,7 +28,7 @@ const swaggerDocs: any = swaggerJsDoc(swaggerOptions);
 
 // serve swagger in apiDocs directory
 const setupSwagger = (app: Express): void => {
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 };
 
 // export swagger endpoint for Express app

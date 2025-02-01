@@ -115,7 +115,7 @@ describe("Employee Routes", () => {
     });
   });
 
-  describe("GET /api/v1/employees/department/:department", () => {
+  describe("GET /api/v1/employees/departments/:department", () => {
     it("should call getEmployeeByDepartment controller", async () => {
       const mockEmployee = {
         id: 1,
@@ -129,7 +129,7 @@ describe("Employee Routes", () => {
 
       const mockDepartment: string = "Accounting";
       await request(app)
-        .get(`/api/v1/employees/department/${mockDepartment}`)
+        .get(`/api/v1/employees/departments/${mockDepartment}`)
         .send(mockEmployee);
       expect(getEmployeeByDepartment).toHaveBeenCalled();
     });

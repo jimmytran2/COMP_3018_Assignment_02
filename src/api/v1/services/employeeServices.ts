@@ -1,6 +1,16 @@
+/**
+ * Employee Service (employeeServices.ts)
+ *
+ * This file defines functions for managing employee data.
+ */
+
 import { employeeData } from "./employeeData";
 import { branchData } from "./branchData";
 
+/**
+ * @interface Employee
+ * @description Represents an employee object
+ */
 export type Employee = {
   id: number;
   name: string;
@@ -11,9 +21,15 @@ export type Employee = {
   branch: number;
 };
 
+// Uses sample employee data from employeeData.ts
 const employees: Employee[] = [...employeeData];
 let newEmployeeId: number = employees.length;
 
+/**
+ * @description Create a new employee
+ * @param {{name: string, position: string, department: string, email: string, phone: string, branch: number}} employee - employee data
+ * @returns {Promise<Employee>} promise that is resolved to the employee thats created
+ */
 export const createEmployee = async (employee: {
   name: string;
   position: string;
@@ -28,10 +44,20 @@ export const createEmployee = async (employee: {
   return newEmployee;
 };
 
+/**
+ * @description Gets all employees
+ * @returns {Promise<Employee[]>} promise that is resolved to all employees that are retrieved
+ */
 export const getAllEmployees = async (): Promise<Employee[]> => {
   return employees;
 };
 
+/**
+ * @description Gets employee by employee id
+ * @param {number} id - unique id for an employee
+ * @returns {Promise<Employee>} promise that is resolved when to the employee thats retrieved
+ * @throws {Error} employee id is not found
+ */
 export const getEmployeeById = async (id: number): Promise<Employee> => {
   const index: number = employees.findIndex((i) => i.id === id);
 
@@ -42,6 +68,13 @@ export const getEmployeeById = async (id: number): Promise<Employee> => {
   return employees[index];
 };
 
+/**
+ * @description Updates an existing employee
+ * @param {number} id - a unique id for an employee
+ * @param {Partial<Employee> } employeeData - object containing employee data to be updated
+ * @returns {Promise<Employee>} promise that is resolved to the employee thats been updated
+ * @throws {Error} employee id is not found
+ */
 export const updateEmployee = async (
   id: number,
   employeeData: Partial<Employee>
@@ -56,6 +89,12 @@ export const updateEmployee = async (
   return employees[index];
 };
 
+/**
+ * @description Deletes an existing employee
+ * @param {number} id - a unqiue id for an employee
+ * @returns {Promise<void>}
+ * @throws {Error} employee id is not found
+ */
 export const deleteEmployee = async (id: number): Promise<void> => {
   const index: number = employees.findIndex((i) => i.id === id);
 
@@ -70,7 +109,13 @@ export const deleteEmployee = async (id: number): Promise<void> => {
  * Array filter method
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
  */
-
+/**
+ * @description Gets employees from a branch
+ * @param {number} branchId - a unique id for a branch
+ * @returns {Promise<Employee[]>} promise that is resolved to an array of the employees from the branch that are retrieved
+ * @throws {Error} branch id is not found
+ * @throws {Error} no employees associated with branch
+ */
 export const getEmployeeByBranch = async (
   branchId: number
 ): Promise<Employee[]> => {
@@ -93,6 +138,13 @@ export const getEmployeeByBranch = async (
   return employeesInBranch;
 };
 
+/**
+ * @description Gets employees from a department
+ * @param {string} department - name of the department
+ * @returns {Promise<Employee[]>} promise that is resolved to an array of the employees from a department are retrieved
+ * @throws {Error} department does not exist
+ * @throws {Error} no employees in that department
+ */
 export const getEmployeeByDepartment = async (
   department: string
 ): Promise<Employee[]> => {
