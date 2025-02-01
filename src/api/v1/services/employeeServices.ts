@@ -97,7 +97,7 @@ export const getEmployeeByDepartment = async (
   department: string
 ): Promise<Employee[]> => {
   const departmentIndex: number = employeeData.findIndex(
-    (employee) => employee.department === department
+    (employee) => employee.department.toLowerCase() === department.toLowerCase()
   );
 
   if (departmentIndex === -1) {
@@ -105,7 +105,7 @@ export const getEmployeeByDepartment = async (
   }
 
   const employeesInDepartment: Employee[] = employees.filter(
-    (employee) => employee.department === department
+    (employee) => employee.department.toLowerCase() === department.toLowerCase()
   );
 
   if (employeesInDepartment.length === 0) {
