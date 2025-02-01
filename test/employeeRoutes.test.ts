@@ -7,6 +7,7 @@ import {
   updateEmployee,
   deleteEmployee,
   getEmployeeByBranch,
+  getEmployeeByDepartment,
 } from "../src/api/v1/controllers/employeeControllers";
 
 jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
@@ -16,6 +17,7 @@ jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
   updateEmployee: jest.fn((req, res) => res.status(200).send()),
   deleteEmployee: jest.fn((req, res) => res.status(200).send()),
   getEmployeeByBranch: jest.fn((req, res) => res.status(200).send()),
+  getEmployeeByDepartment: jest.fn((req, res) => res.statsu(200).send()),
 }));
 
 describe("Employee Routes", () => {
@@ -110,6 +112,26 @@ describe("Employee Routes", () => {
         .get(`/api/v1/employees/branches/${mockBranchId}`)
         .send(mockEmployee);
       expect(getEmployeeByBranch).toHaveBeenCalled();
+    });
+  });
+
+  describe("GET /api/v1/employees/department/:department", () => {
+    it("should call getEmployeeByDepartment controller", async () => {
+      const mockEmployee = {
+        id: 1,
+        name: "John Doe",
+        position: "Manager",
+        department: "Accounting",
+        email: "johndoe@pixell-river.com",
+        phone: "123-456-7890",
+        branch: 9,
+      };
+
+      const mockDepartment: string = "Accounting";
+      await request(app)
+        .get(`/api/v1/employees/department/${mockDepartment}`)
+        .send(mockEmployee);
+      expect(getEmployeeByDepartment).toHaveBeenCalled();
     });
   });
 });

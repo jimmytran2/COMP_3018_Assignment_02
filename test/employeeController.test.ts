@@ -206,4 +206,36 @@ describe("Employee Controller", () => {
       });
     });
   });
+
+  describe("getEmployeeByDepartment", () => {
+    it("should handle a succesful opereation", async () => {
+      const mockEmployee = [
+        {
+          id: 1,
+          name: "John Doe",
+          position: "Manager",
+          department: "Accounting",
+          email: "johndoe@pixell-river.com",
+          phone: "123-456-7890",
+          branch: 9,
+        },
+      ];
+
+      (employeeService.getEmployeeByDepartment as jest.Mock).mockResolvedValue(
+        mockEmployee
+      );
+
+      await employeeController.getEmployeeByDepartment(
+        mockReq as Request,
+        mockRes as Response,
+        mockNext
+      );
+
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+      expect(mockRes.json).toHaveBeenCalledWith({
+        message: "Employees from department retrieved",
+        data: mockEmployee,
+      });
+    });
+  });
 });
