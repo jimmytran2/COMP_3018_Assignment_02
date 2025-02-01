@@ -93,3 +93,23 @@ export const getEmployeeByBranch = async (
     next(error);
   }
 };
+
+export const getEmployeeByDepartment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const employees: Employee[] = await employeeService.getEmployeeByDepartment(
+      req.params.department
+    );
+    res
+      .status(200)
+      .json({
+        message: "Employees from department retrieved",
+        data: employees,
+      });
+  } catch (error) {
+    next(error);
+  }
+};

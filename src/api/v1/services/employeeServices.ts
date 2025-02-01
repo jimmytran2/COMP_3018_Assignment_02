@@ -92,3 +92,25 @@ export const getEmployeeByBranch = async (
 
   return employeesInBranch;
 };
+
+export const getEmployeeByDepartment = async (
+  department: string
+): Promise<Employee[]> => {
+  const departmentIndex: number = employeeData.findIndex(
+    (employee) => employee.department === department
+  );
+
+  if (departmentIndex === -1) {
+    throw new Error(`${department} department does not exist`);
+  }
+
+  const employeesInDepartment: Employee[] = employees.filter(
+    (employee) => employee.department === department
+  );
+
+  if (employeesInDepartment.length === 0) {
+    throw new Error(`There are no employees in the ${department} department`);
+  }
+
+  return employeesInDepartment;
+};
