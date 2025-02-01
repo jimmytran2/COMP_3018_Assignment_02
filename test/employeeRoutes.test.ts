@@ -6,6 +6,7 @@ import {
   getEmployeeById,
   updateEmployee,
   deleteEmployee,
+  getEmployeeByBranch,
 } from "../src/api/v1/controllers/employeeControllers";
 
 jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
@@ -14,6 +15,7 @@ jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
   getEmployeeById: jest.fn((req, res) => res.status(200).send()),
   updateEmployee: jest.fn((req, res) => res.status(200).send()),
   deleteEmployee: jest.fn((req, res) => res.status(200).send()),
+  getEmployeeByBranch: jest.fn((req, res) => res.status(200).send()),
 }));
 
 describe("Employee Routes", () => {
@@ -64,7 +66,7 @@ describe("Employee Routes", () => {
     });
   });
 
-  describe("PUT /api/v1/employee/:id", () => {
+  describe("PUT /api/v1/employees/:id", () => {
     it("should call updateEmployee controller", async () => {
       const mockEmployee = {
         id: 1,
@@ -83,11 +85,31 @@ describe("Employee Routes", () => {
     });
   });
 
-  describe("DELETE /api/v1/employee/:id", () => {
+  describe("DELETE /api/v1/employees/:id", () => {
     it("should call deleteEmployee controller", async () => {
       const mockId: number = 1;
       await request(app).delete(`/api/v1/employees/${mockId}`);
       expect(deleteEmployee).toHaveBeenCalled();
+    });
+  });
+
+  describe("GET /api/v1/employees/branches/:branch", () => {
+    it("should call getEmployeeByBranch controller", async () => {
+      const mockEmployee = {
+        id: 1,
+        name: "John Doe",
+        position: "Manager",
+        department: "Accounting",
+        email: "johndoe@pixell-river.com",
+        phone: "123-456-7890",
+        branch: 9,
+      };
+
+      const mockBranchId: number = 1;
+      await request(app)
+        .get(`/api/v1/employees/branches/${mockBranchId}`)
+        .send(mockEmployee);
+      expect(getEmployeeByBranch).toHaveBeenCalled();
     });
   });
 });
