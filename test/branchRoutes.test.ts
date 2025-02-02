@@ -7,6 +7,7 @@ import {
   updateBranch,
   deleteBranch,
 } from "../src/api/v1/controllers/branchControllers";
+import type { Branch } from "../src/api/v1/services/branchServices";
 
 jest.mock("../src/api/v1/controllers/branchControllers", () => ({
   createBranch: jest.fn((req, res) => res.status(201).send()),
@@ -23,7 +24,7 @@ describe("Branch Routes", () => {
 
   describe("POST api/v1/branches", () => {
     it("should call createBranch controller", async () => {
-      const mockBranch = {
+      const mockBranch: Branch = {
         id: 1,
         name: "Vancouver Branch",
         address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
@@ -44,23 +45,16 @@ describe("Branch Routes", () => {
 
   describe("GET /api/v1/branches", () => {
     it("should call getBranchesById controller", async () => {
-      const mockBranch = {
-        id: 1,
-        name: "Vancouver Branch",
-        address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
-        phone: "604-456-0022",
-      };
-
       const mockId: number = 1;
 
-      await request(app).get(`/api/v1/branches/${mockId}`).send(mockBranch);
+      await request(app).get(`/api/v1/branches/${mockId}`);
       expect(getBranchById).toHaveBeenCalled();
     });
   });
 
   describe("PUT /api/v1/branches/:id", () => {
     it("should call updateBranch controller", async () => {
-      const mockBranch = {
+      const mockBranch: Partial<Branch> = {
         id: 1,
         name: "Vancouver Branch",
         address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",

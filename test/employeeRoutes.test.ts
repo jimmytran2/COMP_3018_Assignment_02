@@ -9,6 +9,7 @@ import {
   getEmployeeByBranch,
   getEmployeeByDepartment,
 } from "../src/api/v1/controllers/employeeControllers";
+import type { Employee } from "../src/api/v1/services/employeeServices";
 
 jest.mock("../src/api/v1/controllers/employeeControllers", () => ({
   createEmployee: jest.fn((req, res) => res.status(201).send()),
@@ -27,7 +28,7 @@ describe("Employee Routes", () => {
 
   describe("POST api/v1/employees", () => {
     it("should call createEmployee controller", async () => {
-      const mockEmployee = {
+      const mockEmployee: Employee = {
         id: 1,
         name: "John Doe",
         position: "Manager",
@@ -51,26 +52,16 @@ describe("Employee Routes", () => {
 
   describe("GET /api/v1/employees/:id", () => {
     it("should call getEmployeeById controller", async () => {
-      const mockEmployee = {
-        id: 1,
-        name: "John Doe",
-        position: "Manager",
-        department: "Accounting",
-        email: "johndoe@pixell-river.com",
-        phone: "123-456-7890",
-        branch: 9,
-      };
-
       const mockId: number = 1;
 
-      await request(app).get(`/api/v1/employees/${mockId}`).send(mockEmployee);
+      await request(app).get(`/api/v1/employees/${mockId}`);
       expect(getEmployeeById).toHaveBeenCalled();
     });
   });
 
   describe("PUT /api/v1/employees/:id", () => {
     it("should call updateEmployee controller", async () => {
-      const mockEmployee = {
+      const mockEmployee: Partial<Employee> = {
         id: 1,
         name: "John Doe",
         position: "Manager",
@@ -97,40 +88,16 @@ describe("Employee Routes", () => {
 
   describe("GET /api/v1/employees/branches/:branch", () => {
     it("should call getEmployeeByBranch controller", async () => {
-      const mockEmployee = {
-        id: 1,
-        name: "John Doe",
-        position: "Manager",
-        department: "Accounting",
-        email: "johndoe@pixell-river.com",
-        phone: "123-456-7890",
-        branch: 9,
-      };
-
       const mockBranchId: number = 1;
-      await request(app)
-        .get(`/api/v1/employees/branches/${mockBranchId}`)
-        .send(mockEmployee);
+      await request(app).get(`/api/v1/employees/branches/${mockBranchId}`);
       expect(getEmployeeByBranch).toHaveBeenCalled();
     });
   });
 
   describe("GET /api/v1/employees/departments/:department", () => {
     it("should call getEmployeeByDepartment controller", async () => {
-      const mockEmployee = {
-        id: 1,
-        name: "John Doe",
-        position: "Manager",
-        department: "Accounting",
-        email: "johndoe@pixell-river.com",
-        phone: "123-456-7890",
-        branch: 9,
-      };
-
       const mockDepartment: string = "Accounting";
-      await request(app)
-        .get(`/api/v1/employees/departments/${mockDepartment}`)
-        .send(mockEmployee);
+      await request(app).get(`/api/v1/employees/departments/${mockDepartment}`);
       expect(getEmployeeByDepartment).toHaveBeenCalled();
     });
   });
