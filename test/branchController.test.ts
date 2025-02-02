@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import * as branchController from "../src/api/v1/controllers/branchControllers";
 import * as branchService from "../src/api/v1/services/branchServices";
+import type { Branch } from "../src/api/v1/services/branchServices";
 
 jest.mock("../src/api/v1/services/branchServices");
 
@@ -18,7 +19,7 @@ describe("Branch Controller", () => {
 
   describe("createBranch", () => {
     it("should handle a succesful operation", async () => {
-      const mockBranch = {
+      const mockBranch: Branch = {
         id: 1,
         name: "Vancouver Branch",
         address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
@@ -43,12 +44,14 @@ describe("Branch Controller", () => {
 
   describe("getAllBranches", () => {
     it("should handle a successful operation", async () => {
-      const mockBranch = {
-        id: 1,
-        name: "Vancouver Branch",
-        address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
-        phone: "604-456-0022",
-      };
+      const mockBranch: Branch[] = [
+        {
+          id: 1,
+          name: "Vancouver Branch",
+          address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
+          phone: "604-456-0022",
+        },
+      ];
 
       (branchService.getAllBranches as jest.Mock).mockResolvedValue(mockBranch);
 
@@ -68,7 +71,7 @@ describe("Branch Controller", () => {
 
   describe("getBranchById", () => {
     it("should handle a successful operation", async () => {
-      const mockBranch = {
+      const mockBranch: Branch = {
         id: 1,
         name: "Vancouver Branch",
         address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
@@ -93,7 +96,7 @@ describe("Branch Controller", () => {
 
   describe("updateBranch", () => {
     it("should handle a successful operation", async () => {
-      const mockBranch = {
+      const mockBranch: Branch = {
         id: 1,
         name: "Vancouver Branch",
         address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
@@ -118,14 +121,7 @@ describe("Branch Controller", () => {
 
   describe("deleteBranch", () => {
     it("should handle a successful operation", async () => {
-      const mockBranch = {
-        id: 1,
-        name: "Vancouver Branch",
-        address: "1300 Burrard St, Vancouver, BC, V6Z 2C7",
-        phone: "604-456-0022",
-      };
-
-      (branchService.deleteBranch as jest.Mock).mockResolvedValue(mockBranch);
+      (branchService.deleteBranch as jest.Mock).mockResolvedValue(undefined);
 
       await branchController.deleteBranch(
         mockReq as Request,

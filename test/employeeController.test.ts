@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import * as employeeController from "../src/api/v1/controllers/employeeControllers";
 import * as employeeService from "../src/api/v1/services/employeeServices";
+import type { Employee } from "../src/api/v1/services/employeeServices";
 
 jest.mock("../src/api/v1/services/employeeServices");
 
@@ -18,17 +19,15 @@ describe("Employee Controller", () => {
 
   describe("createEmployee", () => {
     it("should handle a successful operation", async () => {
-      const mockEmployee = [
-        {
-          id: 1,
-          name: "John Doe",
-          position: "Manager",
-          department: "Accounting",
-          email: "johndoe@pixell-river.com",
-          phone: "123-456-7890",
-          branch: 9,
-        },
-      ];
+      const mockEmployee: Employee = {
+        id: 1,
+        name: "John Doe",
+        position: "Manager",
+        department: "Accounting",
+        email: "johndoe@pixell-river.com",
+        phone: "123-456-7890",
+        branch: 9,
+      };
 
       (employeeService.createEmployee as jest.Mock).mockResolvedValue(
         mockEmployee
@@ -50,7 +49,7 @@ describe("Employee Controller", () => {
 
   describe("getAllEmployees", () => {
     it("should handle a successful operation", async () => {
-      const mockEmployee = [
+      const mockEmployee: Employee[] = [
         {
           id: 1,
           name: "John Doe",
@@ -82,17 +81,15 @@ describe("Employee Controller", () => {
 
   describe("getEmployeeById", () => {
     it("should handle a succesful opereation", async () => {
-      const mockEmployee = [
-        {
-          id: 1,
-          name: "John Doe",
-          position: "Manager",
-          department: "Accounting",
-          email: "johndoe@pixell-river.com",
-          phone: "123-456-7890",
-          branch: 9,
-        },
-      ];
+      const mockEmployee: Employee = {
+        id: 1,
+        name: "John Doe",
+        position: "Manager",
+        department: "Accounting",
+        email: "johndoe@pixell-river.com",
+        phone: "123-456-7890",
+        branch: 9,
+      };
 
       (employeeService.getEmployeeById as jest.Mock).mockResolvedValue(
         mockEmployee
@@ -114,17 +111,15 @@ describe("Employee Controller", () => {
 
   describe("updateEmployee", () => {
     it("should handle successful operation", async () => {
-      const mockEmployee = [
-        {
-          id: 1,
-          name: "John Doe",
-          position: "Manager",
-          department: "Accounting",
-          email: "johndoe@pixell-river.com",
-          phone: "123-456-7890",
-          branch: 9,
-        },
-      ];
+      const mockEmployee: Employee = {
+        id: 1,
+        name: "John Doe",
+        position: "Manager",
+        department: "Accounting",
+        email: "johndoe@pixell-river.com",
+        phone: "123-456-7890",
+        branch: 9,
+      };
 
       (employeeService.updateEmployee as jest.Mock).mockResolvedValue(
         mockEmployee
@@ -146,20 +141,8 @@ describe("Employee Controller", () => {
 
   describe("deleteEmployee", () => {
     it("should handle successfull operation", async () => {
-      const mockEmployee = [
-        {
-          id: 1,
-          name: "John Doe",
-          position: "Manager",
-          department: "Accounting",
-          email: "johndoe@pixell-river.com",
-          phone: "123-456-7890",
-          branch: 9,
-        },
-      ];
-
       (employeeService.deleteEmployee as jest.Mock).mockResolvedValue(
-        mockEmployee
+        undefined
       );
 
       await employeeController.deleteEmployee(
@@ -177,7 +160,7 @@ describe("Employee Controller", () => {
 
   describe("getEmployeeByBranch", () => {
     it("should handle a succesful opereation", async () => {
-      const mockEmployee = [
+      const mockEmployee: Employee[] = [
         {
           id: 1,
           name: "John Doe",
@@ -209,7 +192,7 @@ describe("Employee Controller", () => {
 
   describe("getEmployeeByDepartment", () => {
     it("should handle a succesful opereation", async () => {
-      const mockEmployee = [
+      const mockEmployee: Employee[] = [
         {
           id: 1,
           name: "John Doe",
