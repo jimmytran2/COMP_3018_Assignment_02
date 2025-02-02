@@ -85,7 +85,11 @@ export const updateEmployee = async (
     throw new Error(`Employee with ID ${id} not found`);
   }
 
-  employees[index] = { ...employees[index], ...employeeData };
+  const safeEmployeeData: Partial<Employee> = { ...employeeData };
+  delete safeEmployeeData.id;
+  delete safeEmployeeData.name;
+
+  employees[index] = { ...employees[index], ...safeEmployeeData };
   return employees[index];
 };
 

@@ -103,8 +103,6 @@ router.get("/:id", employeeController.getEmployeeById);
  *           schema:
  *             type: object
  *             properties:
- *               name:
- *                 type: string
  *               position:
  *                 type: string
  *               department:

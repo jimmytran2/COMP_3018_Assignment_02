@@ -78,7 +78,10 @@ export const updateBranch = async (
     throw new Error(`Branch with ID ${id} not found`);
   }
 
-  branches[index] = { ...branches[index], ...branchData };
+  const safeBranchData: Partial<Branch> = { ...branchData };
+  delete safeBranchData.id;
+
+  branches[index] = { ...branches[index], ...safeBranchData };
   return branches[index];
 };
 
