@@ -43,7 +43,7 @@ describe("Branch Routes", () => {
     });
   });
 
-  describe("GET /api/v1/branches", () => {
+  describe("GET /api/v1/branches/:id", () => {
     it("should call getBranchesById controller", async () => {
       const mockId: number = 1;
 
